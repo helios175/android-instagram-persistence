@@ -13,8 +13,8 @@ import com.codepath.persistencedemo.models.InstagramUser;
 import java.util.ArrayList;
 import java.util.List;
 
-public class InstagramClientDatabase extends SQLiteOpenHelper {
-    private static final String TAG = "InstagramClientDatabase";
+public class InstagramDbHelper extends SQLiteOpenHelper {
+    private static final String TAG = "InstagramDbHelper";
 
     // Constants
     private static final String DATABASE_NAME = "instagramClientDatabase";
@@ -59,22 +59,22 @@ public class InstagramClientDatabase extends SQLiteOpenHelper {
                     TABLE_USERS, KEY_USER_ID);
 
     // Singleton instance
-    private static InstagramClientDatabase sInstance;
+    private static InstagramDbHelper sInstance;
 
     /**
      * Constructor should be private to prevent direct instantiation.
      * make call to static method "getInstance()" instead.
      */
-    private InstagramClientDatabase(Context context) {
+    private InstagramDbHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
-    public static synchronized InstagramClientDatabase getInstance(Context context) {
+    public static synchronized InstagramDbHelper getInstance(Context context) {
         if (sInstance == null) {
             // Use the application context, which will ensure that you
             // don't accidentally leak an Activity's context.
             // See this article for more information: http://bit.ly/6LRzfx
-            sInstance = new InstagramClientDatabase(context.getApplicationContext());
+            sInstance = new InstagramDbHelper(context.getApplicationContext());
         }
         return sInstance;
     }
