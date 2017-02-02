@@ -12,21 +12,15 @@
 var express = require('express');
 var app = express();
 
-var now = new Date().getTime();
-
-var pictures = [
-  'https://scontent-lax.xx.fbcdn.net/v/t1.0-9/1454892_675291165943204_5786179733560918736_n.jpg?oh=c056bd2a5b0fbaab7f98f577eb33026c&oe=5833412A',
-  'https://scontent-lax.xx.fbcdn.net/t31.0-8/10687254_675291175943203_4443188462921757375_o.jpg',
-  'https://scontent-lax.xx.fbcdn.net/v/t1.0-9/10403699_675291022609885_121817150363952355_n.jpg?oh=5f22a168448c6885c2032d7e061c72aa&oe=57FAF16F'
-];
+var now = (new Date().getTime() / 1000); // Javascript is # of ms from 1970, but we need to return # of secs since 1970
 
 function createPost(i) {
   return {
     "user": {
       "username": "user" + i,
-      "profile_picture": pictures[i % pictures.length]
+      "profile_picture": "https://dummyimage.com/100x100/000/fff.jpg&text=" + i
     },
-    "created_time": now + i
+    "created_time": now - (i * 3) // the lower the post in the list, the older
   };
 }
 
@@ -36,7 +30,7 @@ app.get('/media/popular', function (req, res) {
     ]
   };
   for (var i = 0; i < 32; i++) {
-    data.data.push(createPost(i));
+    data.data.push(createPost(i+1));
   }
   res.send(JSON.stringify(data, null, 2));
 });
