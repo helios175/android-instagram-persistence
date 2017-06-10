@@ -5,7 +5,7 @@ import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
 public class InstagramClient {
-    private static final String BASE_URL = "https://192.168.50.39:3000/";
+    private static final String BASE_URL = "http://192.168.50.39:3000/";
     private static final String CLIENT_ID = "e05c462ebd86446ea48a5af73769b602";
 
     private static AsyncHttpClient client = new AsyncHttpClient();
